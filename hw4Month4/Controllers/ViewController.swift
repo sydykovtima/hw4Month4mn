@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
 
         @IBOutlet private weak var typeOfOrderCollectionView: UICollectionView!
@@ -14,7 +16,7 @@ class ViewController: UIViewController {
         @IBOutlet private weak var productTableView: UITableView!
           
         let productsinfo = Products().printAllInfo()
-    var createSelectionsDelegate: CreateSelections?
+
         private let productArray: [Product] = [
             Product(productsImageView: "Burger Craze",
                     nameProducts: "Burger Craze",
@@ -72,7 +74,7 @@ class ViewController: UIViewController {
             typeOfOrderCollectionView.delegate = self
             typeOfOrderCollectionView.register(UINib(nibName:
             String(describing: OrderTypeCollectionViewCell.self),
-            bundle: nil), forCellWithReuseIdentifier:    OrderTypeCollectionViewCell.reuseIdentifierForOrderType)
+            bundle: nil), forCellWithReuseIdentifier: OrderTypeCollectionViewCell.reuseIdentifierForOrderType)
             categoryCollectionView.register(UINib(nibName: String(
             describing: CategoryCollectionViewCell.self), bundle: nil),
             forCellWithReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier)
@@ -91,6 +93,7 @@ class ViewController: UIViewController {
             ) as! ProductTableViewCell
             let model = productArray[indexPath.row]
             cell.display(item: model)
+            cell.delegate = self
             print("cell created")
             return cell
         }
@@ -120,16 +123,16 @@ class ViewController: UIViewController {
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             if collectionView == categoryCollectionView {
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier,
-                    for: indexPath
+                withReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier,
+                for: indexPath
                 ) as! CategoryCollectionViewCell
                 let model = categoryArray[indexPath.row]
                 cell.display(item: model)
                 return cell
                 } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderTypeCollectionViewCell
-                    .reuseIdentifierForOrderType,
-                    for: indexPath) as! OrderTypeCollectionViewCell
+                .reuseIdentifierForOrderType,
+                for: indexPath) as! OrderTypeCollectionViewCell
                 let model = orderType[indexPath.row]
                 cell.backgroundColor = orderType[0].backGroundColorForText
                 cell.backgroundColor = orderType[indexPath.row].backGroundColorForText
@@ -153,13 +156,21 @@ class ViewController: UIViewController {
         }
     }
 
-extension ViewController: CreateSelections {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectSelection()
-    }
-    
-    func didSelectSelection() {
-        let secondVC = storyboard?.instantiateViewController(withIdentifier: "second_vc")
-        navigationController?.pushViewController(secondVC!, animated: true)
+extension ViewController: ProductsCellDelegate {
+    func didSelectionsProducts(item: Product) {
+        let secondVC = storyboard?.instantiateViewController(withIdentifier: "second_vc") as! SecondViewController
+//        secondVC.product = item
+        navigationController?.pushViewController(secondVC, animated: true)
     }
 }
+
+//extension ViewController: CreateSelections {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        didSelectSelection()
+//    }
+//
+//    func didSelectSelection() {
+//        let secondVC = storyboard?.instantiateViewController(withIdentifier: "second_vc")
+//        navigationController?.pushViewController(secondVC!, animated: true)
+//    }
+//}

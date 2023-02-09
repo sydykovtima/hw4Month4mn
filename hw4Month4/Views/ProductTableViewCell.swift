@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ProductsCellDelegate: AnyObject {
+    func didSelectionsProducts (item: Product)
+        
+    }
+
 class ProductTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = String(describing: ProductTableViewCell.self)
@@ -18,9 +23,18 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet private weak var costLable: UILabel!
     @IBOutlet private weak var deliveryLable: UILabel!
     @IBOutlet private weak var whereFromProducts: UILabel!
-    @IBOutlet private weak var productImageView: UIImageView!
+    @IBOutlet private weak var productImageView: UIImageView! {
+        didSet {
+            productImageView.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(didTapOnImage))
+            productImageView.addGestureRecognizer(tap)
+        }
+    }
 
-    func display(item: Product) {
+    weak var delegate: ProductsCellDelegate?
+    private var products: Product?
+        public func display(item: Product) {
+        products = item
         productImageView.image = UIImage(named: item.productsImageView)
         whereFromProducts.text = item.madeOnTheWord
         productNameLable.text = item.nameProducts
@@ -37,7 +51,14 @@ class ProductTableViewCell: UITableViewCell {
         costLable.textColor = .lightGray
         whereFromProducts.textColor = .lightGray
     }
-
+    @objc
+    private func didTapOnImage() {
+        print("Selections tapped")
+        guard let products = products else {
+            return
+        }
+        delegate?.didSelectionsProducts(item: products)
+    }
 }
 
 struct Product {

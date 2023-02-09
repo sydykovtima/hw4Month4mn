@@ -12,6 +12,7 @@ class OrderTypeCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifierForOrderType = String(describing: TypeOfOrder.self)
     @IBOutlet private weak var typeOfOrderLable: UILabel!
     @IBOutlet private weak var deliveryImage: UIImageView!
+    
     func display(item: TypeOfOrder) {
         typeOfOrderLable.text = item.orderOfType
         typeOfOrderLable.layer.borderColor = UIColor.lightGray.cgColor
