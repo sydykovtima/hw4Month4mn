@@ -14,7 +14,8 @@ final class NetworkLayer {
     
     func fetchProducts() throws -> [CreateProducts]? {
         let decoder = JSONDecoder()
-        let createProducts = try? decoder.decode([CreateProducts].self, from: Data(productJSON.utf8))
+        let createProducts = try? decoder.decode([CreateProducts].self, 
+        from: Data(productJSON.utf8))
         return createProducts
     }
 }
