@@ -15,9 +15,7 @@ import UIKit
 class SecondViewController: UIViewController {
     
     @IBOutlet weak var createProductsCollectionView: UICollectionView!
-    
-//    var product: Product? = nil
-    //   weak var delegate: Product?
+   
     private var products: [CreateProducts] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +25,9 @@ class SecondViewController: UIViewController {
     private func configureCV() {
         createProductsCollectionView.dataSource = self
         createProductsCollectionView.dataSource = self
-        createProductsCollectionView.register(UINib(nibName: CreateCollectionViewCell.reuseId, bundle: nil), forCellWithReuseIdentifier: CreateCollectionViewCell.reuseId)
+        createProductsCollectionView.register(UINib(nibName:
+        CreateCollectionViewCell.reuseId, bundle: nil),
+        forCellWithReuseIdentifier: CreateCollectionViewCell.reuseId)
     }
     private func fetchProducts() {
         do { products = try NetworkLayer.shared.fetchProducts() ?? []
@@ -41,18 +41,22 @@ class SecondViewController: UIViewController {
 }
 
 extension SecondViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int
+     ) -> Int {
        return products.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreateCollectionViewCell.reuseId, for: indexPath) as! CreateCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreateCollectionViewCell.reuseId,
+        for: indexPath) as! CreateCollectionViewCell
         let model = products[indexPath.row]
         cell.display(item: model)
         return cell
     }
 }
 extension SecondViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, 
+     sizeForItemAt indexPath: IndexPath
+     ) -> CGSize {
         .init(width: collectionView.frame.width, height: 700)
     }
 }
