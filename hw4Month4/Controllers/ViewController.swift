@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class ViewController: UIViewController {
 
         @IBOutlet private weak var typeOfOrderCollectionView: UICollectionView!
@@ -78,7 +76,8 @@ class ViewController: UIViewController {
             categoryCollectionView.register(UINib(nibName: String(
             describing: CategoryCollectionViewCell.self), bundle: nil),
             forCellWithReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier)
-            productTableView.register(UINib(nibName: String( describing: ProductTableViewCell.self) , bundle: nil), forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
+            productTableView.register(UINib(nibName: String( describing: ProductTableViewCell.self) 
+             , bundle: nil), forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
                 }
             }
 
