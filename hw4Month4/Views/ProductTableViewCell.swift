@@ -8,8 +8,7 @@
 import UIKit
 
 protocol ProductsCellDelegate: AnyObject {
-    func didSelectionsProducts (item: Product)
-        
+    func didSelectionsProducts (item: Product)  
     }
 
 class ProductTableViewCell: UITableViewCell {
