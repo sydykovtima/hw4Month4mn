@@ -7,11 +7,6 @@
 
 import UIKit
 
-
-//protocol CreateSelections  {
-//    func didSelectSelection(product: Products )
-//}
-
 class SecondViewController: UIViewController {
     
     @IBOutlet weak var createProductsCollectionView: UICollectionView!
