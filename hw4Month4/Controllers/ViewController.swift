@@ -120,7 +120,9 @@ class ViewController: UIViewController {
             return orderType.count
         }
         
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        func collectionView(_ collectionView: UICollectionView, 
+           cellForItemAt indexPath: IndexPath
+            ) -> UICollectionViewCell {
             if collectionView == categoryCollectionView {
                 let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier,
@@ -158,19 +160,9 @@ class ViewController: UIViewController {
 
 extension ViewController: ProductsCellDelegate {
     func didSelectionsProducts(item: Product) {
-        let secondVC = storyboard?.instantiateViewController(withIdentifier: "second_vc") as! SecondViewController
-//        secondVC.product = item
+        let secondVC = storyboard?.
+       instantiateViewController(withIdentifier: "second_vc") as! SecondViewController
         navigationController?.pushViewController(secondVC, animated: true)
     }
 }
 
-//extension ViewController: CreateSelections {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        didSelectSelection()
-//    }
-//
-//    func didSelectSelection() {
-//        let secondVC = storyboard?.instantiateViewController(withIdentifier: "second_vc")
-//        navigationController?.pushViewController(secondVC!, animated: true)
-//    }
-//}
